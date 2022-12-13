@@ -13,7 +13,9 @@ import pandas as pd
 USERNAME_PASSWORD_PAIRS =  [['username','password'],['Hello','World']]
 
 data = pd.read_csv("F:\\downloads\\REAL PYTHON DASH SOURCE CODE\\additional_files\\avocado.csv")
+
 #data = data.query("type == 'conventional' and region == 'Albany'")
+
 data["Date"] = pd.to_datetime(data["Date"], format="%Y-%m-%d")
 data.sort_values("Date", inplace=True)
 external_stylesheets = [
