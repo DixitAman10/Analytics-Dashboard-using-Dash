@@ -7,11 +7,9 @@ from dash import dcc
 from dash import  html
 from dash.dependencies import Input, Output
 import numpy as np
-
 import pandas as pd
 
 USERNAME_PASSWORD_PAIRS =  [['username','password'],['Hello','World']]
-
 data = pd.read_csv("F:\\downloads\\REAL PYTHON DASH SOURCE CODE\\additional_files\\avocado.csv")
 
 #data = data.query("type == 'conventional' and region == 'Albany'")
