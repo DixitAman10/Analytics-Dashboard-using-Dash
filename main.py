@@ -4,7 +4,7 @@
 import dash
 import dash_auth
 from dash import dcc
-from dash import html
+from dash import  html
 from dash.dependencies import Input, Output
 import numpy as np
 
@@ -12,9 +12,8 @@ import pandas as pd
 
 USERNAME_PASSWORD_PAIRS =  [['username','password'],['Hello','World']]
 
-
 data = pd.read_csv("F:\\downloads\\REAL PYTHON DASH SOURCE CODE\\additional_files\\avocado.csv")
-data = data.query("type == 'conventional' and region == 'Albany'")
+#data = data.query("type == 'conventional' and region == 'Albany'")
 data["Date"] = pd.to_datetime(data["Date"], format="%Y-%m-%d")
 data.sort_values("Date", inplace=True)
 external_stylesheets = [
@@ -25,10 +24,10 @@ external_stylesheets = [
     },
 ]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-app.title = "Avocado Analytics: Understand Your Avocados!"
-#app = dash.Dash()
 auth = dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
-server = app.server  #for deployment purpose
+
+server = app.server
+app.title = "Avocado Analytics: Understand Your Avocados!"
 
 app.layout = html.Div(
     children=[
@@ -58,8 +57,8 @@ app.layout = html.Div(
                                 {"label": region, "value": region}
                                 for region in np.sort(data.region.unique())
                             ],
-                            value="Albany",
-                            clearable=False,
+                            value="",
+                            clearable=True,
                             className="dropdown",
                         ),
                     ]
@@ -73,9 +72,9 @@ app.layout = html.Div(
                                 {"label": avocado_type, "value": avocado_type}
                                 for avocado_type in data.type.unique()
                             ],
-                            value="organic",
-                            clearable=False,
-                            searchable=False,
+                            value="",
+                            clearable=True,
+                            searchable=True,
                             className="dropdown",
                         ),
                     ],
@@ -120,13 +119,13 @@ app.layout = html.Div(
 
 
 @app.callback(
-    [Output('price-chart', 'figure'), Output('volume-chart', 'figure')],
+    [Output("price-chart", "figure"), Output("volume-chart", "figure")],
     [
-        Input('region-filter', 'value'),
-        Input('type-filter', 'value'),
-        Input('date-range', 'start_date'),
-        Input('date-range', 'end_date'),
-    ]
+        Input("region-filter", "value"),
+        Input("type-filter", "value"),
+        Input("date-range", "start_date"),
+        Input("date-range", "end_date"),
+    ],
 )
 def update_charts(region, avocado_type, start_date, end_date):
     mask = (
@@ -173,10 +172,6 @@ def update_charts(region, avocado_type, start_date, end_date):
         },
     }
     return price_chart_figure, volume_chart_figure
-
-
-
-
 
 
 # Press the green button in the gutter to run the script.
