@@ -1,1 +1,4 @@
-pip freeze > requirements.txt
+#pip freeze > requirements.txt
+dash==1.13.3
+pandas==1.0.5
+gunicorn==20.0.4
