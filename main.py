@@ -3,6 +3,7 @@
 # Press Shift+F10 to execute it or replace it with your code.
 import dash
 import dash_auth
+import gunicorn
 from dash import dcc
 from dash import  html
 from dash.dependencies import Input, Output
@@ -174,7 +175,8 @@ def update_charts(region, avocado_type, start_date, end_date):
         },
     }
     return price_chart_figure, volume_chart_figure
-
+print(dash.__version__)
+print(gunicorn.version_info)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
